@@ -1,32 +1,40 @@
 {
     "name": "Anti-HoneyPot[By-MegaVector]",
-    "version": "1.0.2",
-    "manifest_version": 2,
-    "description": "",
+    "version": "1.0.3",
+    "manifest_version": 3,
+    "description": "检测WEB蜜罐并拦截跨域JSONP请求，防止红队被溯源真实ID",
     "icons": {
         "128": "/img/logo.png"
-      },      
-    "browser_action": {
-		"default_popup": "popup.html",
+    },      
+    "action": {
+        "default_popup": "popup.html",
         "default_title": "Anti-HoneyPot[By-MegaVector]",
         "default_icon": "./img/logo.png"
     },
     "background": {
-        "persistent": true,
-        "scripts": [
-            "background.js"
-        ]
+        "service_worker": "background.js"
     },
     "permissions": [
         "notifications",
         "activeTab",
         "tabs",
         "storage",
-        "https://*/*",
-        "http://*/*",
         "webRequest",
         "webRequestBlocking"
+        // 移除 alarms 权限（更新检测的定时任务不再需要）
     ],
-    "web_accessible_resources": ["*"],
-    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+    "host_permissions": [
+        "https://*/*",
+        "http://*/*"
+        // 移除 GitHub API 相关主机权限
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": ["*"],
+            "matches": ["<all_urls>"]
+        }
+    ],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-eval'"
+    }
 }
