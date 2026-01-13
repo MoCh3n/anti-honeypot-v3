@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=300, height=150">
+    <meta name="viewport" content="width=300, height=280"> <!-- 加高弹窗适配新内容 -->
     <title>蜜罐检测插件</title>
     <style>
         body {
@@ -16,7 +16,7 @@
         }
         #container {
             width: 300px;
-            height: 150px;
+            height: 280px;
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 15px;
@@ -43,6 +43,27 @@
             margin-top: 10px;
             cursor: pointer;
         }
+        /* 新增白名单样式 */
+        .whitelist-section {
+            margin-top: 15px;
+            width: 100%;
+        }
+        #whitelistInput {
+            width: 80%;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+        #saveWhitelist {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        #currentWhitelist {
+            font-size: 12px;
+            color: #666;
+            margin-top: 8px;
+            max-width: 100%;
+            word-break: break-all;
+        }
     </style>
 </head>
 <body>
@@ -51,7 +72,16 @@
         <div id="counter">已拦截蜜罐数量: 0</div>
         <button id="toggleButton">启动插件</button>
         <div id="status">当前状态: 已启动</div>
-        <a href="https://github.com/cnrstar/anti-honeypot">版本 V1.01</a>
+        
+        <!-- 新增白名单配置区域 -->
+        <div class="whitelist-section">
+            <div>白名单配置（域名，多个用逗号分隔）：</div>
+            <input type="text" id="whitelistInput" placeholder="例：apibaidu.com,static.xxx.com">
+            <button id="saveWhitelist">保存</button>
+            <div id="currentWhitelist">当前白名单：无</div>
+        </div>
+
+        <a href="https://github.com/cnrstar/anti-honeypot">版本 V1.0.3</a>
     </div>
     <script src="popup.js"></script>
 </body>
